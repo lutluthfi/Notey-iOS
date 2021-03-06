@@ -9,6 +9,7 @@
 //  Modified by Arif Luthfiansyah
 //  Created by Oleh Kudinov
 
+import RxSwift
 import Foundation
 
 // MARK: WSDetailViewModelResponse
@@ -63,7 +64,9 @@ final class DefaultWSDetailViewModel: WSDetailViewModel {
     
 
     // MARK: Output ViewModel
-    let response = Observable<WSDetailViewModelResponse?>(nil)
+    let response = Observable<WSDetailViewModelResponse?>.create { (observer) -> Disposable in
+        return Disposables.create()
+    }
     
 
     // MARK: Init Function

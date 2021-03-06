@@ -10,17 +10,14 @@
 //  Created by Oleh Kudinov
 
 import RxCocoa
-import RxSwift
 import UIKit
 
 // MARK: WorkspaceController
 final class WorkspaceController: UIViewController {
 
     // MARK: DI Variable
-    let disposeBag = DisposeBag()
     lazy var _view: WorkspaceView = {
         return DefaultWorkspaceView(
-            delegate: self,
             navigationBar: self.navigationController?.navigationBar,
             navigationItem: self.navigationItem
         )
@@ -62,6 +59,7 @@ final class WorkspaceController: UIViewController {
     private func setupViewDidLoad() {
         self.view = (self._view as! UIView)
         self._view.viewDidLoad(self)
+        self.subscribeUI()
     }
     
     private func setupViewWillAppear() {
@@ -72,36 +70,58 @@ final class WorkspaceController: UIViewController {
         self._view.viewWillDisappear()
     }
     
+    private func subscribeUI() {
+        self.subscribeSquarePencilBarButtonItemTap()
+    }
+    
+}
+
+// MARK: SubscribeSquarePencilBarButtonItemTap Function
+extension WorkspaceController {
+    
+    func subscribeSquarePencilBarButtonItemTap() {
+        self._view.squarePencilBarButtonItem.rx.tap
+            .bind(onNext: self.onNextSubscribeSquarePencilBarButtonItemTap())
+            .disposed(by: self.viewModel.disposeBag)
+    }
+    
+    private func onNextSubscribeSquarePencilBarButtonItemTap() -> (() -> Void) {
+        return { [unowned self] in
+            let alertController = UIAlertController(title: "Create workspace",
+                                                    message: "Enter a name for this worksapce",
+                                                    preferredStyle: .alert)
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Name of workspace"
+                textField.clearButtonMode = .whileEditing
+                textField.clearsOnBeginEditing = true
+            }
+            let createAction = UIAlertAction(title: "Create", style: .default) { [weak self] (action) in
+                self?.viewModel.showWSDetailUI()
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { _ in }
+            alertController.addAction(cancelAction)
+            alertController.addAction(createAction)
+            guard let alertNameTextField = alertController.textFields?[0] else { return }
+            alertNameTextField.rx.text.orEmpty
+                .subscribe(onNext: { createAction.isEnabled = !$0.isEmpty })
+                .disposed(by: self.viewModel.disposeBag)
+            self.present(alertController, animated: true)
+        }
+    }
+    
+}
+
+// MARK: SubscribeTableView Function
+extension WorkspaceController {
+    
+    func subscribeTableView() {
+        
+
+    }
+    
 }
 
 // MARK: Observe ViewModel Function
 extension WorkspaceController {
 
-}
-
-// MARK: WorkspaceViewDelegate
-extension WorkspaceController: WorkspaceViewDelegate {
-    
-    func onSquarePencilBarButtonItemTapped(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Create workspace",
-                                                message: "Enter a name for this worksapce",
-                                                preferredStyle: .alert)
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Name of workspace"
-            textField.clearButtonMode = .whileEditing
-            textField.clearsOnBeginEditing = true
-        }
-        let createAction = UIAlertAction(title: "Create", style: .default) { [weak self] (action) in
-            self?.viewModel.showWSDetailUI()
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { _ in }
-        alertController.addAction(cancelAction)
-        alertController.addAction(createAction)
-        guard let alertNameTextField = alertController.textFields?[0] else { return }
-        alertNameTextField.rx.text.orEmpty
-            .subscribe(onNext: { createAction.isEnabled = !$0.isEmpty })
-            .disposed(by: self.disposeBag)
-        self.present(alertController, animated: true)
-    }
-    
 }

@@ -16,6 +16,8 @@ public enum CoreDataStorageError: Error {
 
 public protocol CoreDataStorageShared {
     
+    var fetchContainerName: String { get }
+    
     var fetchCollectionTimeout: TimeInterval { get }
     
     var fetchElementTimeout: TimeInterval { get }
@@ -23,6 +25,10 @@ public protocol CoreDataStorageShared {
     var insertCollectionTimeout: TimeInterval { get }
     
     var insertElementTimeout: TimeInterval { get }
+    
+    var removeCollectionTimeout: TimeInterval { get }
+    
+    var removeElementTimeout: TimeInterval { get }
     
     func saveContext()
     
@@ -37,7 +43,7 @@ public final class CoreDataStorage {
     private init() { }
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "CoreDataStorage")
+        let container = NSPersistentContainer(name: self.fetchContainerName)
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 debugPrint("CoreDataStorage Unresolved error \(error), \(error.userInfo)")
@@ -50,20 +56,32 @@ public final class CoreDataStorage {
 
 extension CoreDataStorage: CoreDataStorageShared {
     
+    public var fetchContainerName: String {
+        return "CoreDataStorage"
+    }
+    
     public var fetchCollectionTimeout: TimeInterval {
-        return TimeInterval(5)
+        return TimeInterval(60)
     }
     
     public var fetchElementTimeout: TimeInterval {
-        return TimeInterval(2)
+        return TimeInterval(30)
     }
     
     public var insertCollectionTimeout: TimeInterval {
-        return TimeInterval(5)
+        return TimeInterval(60)
     }
     
     public var insertElementTimeout: TimeInterval {
-        return TimeInterval(2)
+        return TimeInterval(30)
+    }
+    
+    public var removeCollectionTimeout: TimeInterval {
+        return TimeInterval(60)
+    }
+    
+    public var removeElementTimeout: TimeInterval {
+        return TimeInterval(30)
     }
     
     public func saveContext() {

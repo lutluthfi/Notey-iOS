@@ -10,6 +10,7 @@
 //  Created by Oleh Kudinov
 
 import Foundation
+import RxSwift
 
 // MARK: WorkspaceViewModelResponse
 enum WorkspaceViewModelResponse {
@@ -39,7 +40,8 @@ protocol WorkspaceViewModelInput {
 // MARK: WorkspaceViewModelOutput
 protocol WorkspaceViewModelOutput {
 
-    var response: Observable<WorkspaceViewModelResponse?> { get }
+    var disposeBag: DisposeBag { get }
+    var displayedWorkspaces: BehaviorSubject<[WorkspaceDomain]> { get }
 
 }
 
@@ -63,7 +65,8 @@ final class DefaultWorkspaceViewModel: WorkspaceViewModel {
     
 
     // MARK: Output ViewModel
-    let response = Observable<WorkspaceViewModelResponse?>(nil)
+    let disposeBag = DisposeBag()
+    let displayedWorkspaces = BehaviorSubject<[WorkspaceDomain]>(value: [])
     
 
     // MARK: Init Function

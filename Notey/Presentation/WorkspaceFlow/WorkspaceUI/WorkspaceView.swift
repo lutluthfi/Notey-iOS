@@ -12,14 +12,7 @@
 import UIKit
 
 // MARK: WorkspaceViewDelegate
-@objc
 protocol WorkspaceViewDelegate: AnyObject {
-    
-    @objc
-    optional func onRightBarButtonItemTapped(_ sender: UIBarButtonItem)
-    
-    @objc
-    optional func onSquarePencilBarButtonItemTapped(_ sender: UIBarButtonItem)
     
 }
 
@@ -27,26 +20,28 @@ protocol WorkspaceViewDelegate: AnyObject {
 protocol WorkspaceViewSubview {
     var navigationBar: UINavigationBar? { get }
     var navigationItem: UINavigationItem! { get }
+    
+    var squarePencilBarButtonItem: UIBarButtonItem { get }
     var tableView: UITableView { get }
+    var titleBarButtonItem: UIBarButtonItem { get }
 }
 
-// MARK: WorkspaceViewInput
-protocol WorkspaceViewInput {
+// MARK: WorkspaceViewVariable
+protocol WorkspaceViewVariable {
+    var delegate: WorkspaceViewDelegate? { get }
+    
+    var workspaceTableCellIdentifier: String { get }
+}
+
+// MARK: WorkspaceViewFunction
+protocol WorkspaceViewFunction {
     func viewDidLoad(_ controller: UIViewController)
     func viewWillAppear()
     func viewWillDisappear()
 }
 
 // MARK: WorkspaceView
-protocol WorkspaceView: WorkspaceViewInput, WorkspaceViewSubview {
-    func getWorkspaceTableCellIdentifier() -> String
-}
-
-extension WorkspaceView {
-    func getWorkspaceTableCellIdentifier() -> String {
-        return "WorkspaceTableCell"
-    }
-}
+protocol WorkspaceView: WorkspaceViewFunction, WorkspaceViewSubview, WorkspaceViewVariable { }
 
 // MARK: DefaultWorkspaceView
 final class DefaultWorkspaceView: UIView, WorkspaceView {
@@ -54,23 +49,36 @@ final class DefaultWorkspaceView: UIView, WorkspaceView {
     // MARK: Subview Variable
     weak var navigationBar: UINavigationBar?
     weak var navigationItem: UINavigationItem!
+    
+    lazy var squarePencilBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"),
+                               style: .done,
+                               target: self,
+                               action: nil)
+    }()
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.bounds)
         tableView.backgroundColor = .white
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.getWorkspaceTableCellIdentifier())
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.workspaceTableCellIdentifier)
         return tableView
+    }()
+    lazy var titleBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "No workspace",
+                               style: .done,
+                               target: self,
+                               action: nil)
     }()
     
     // MARK: DI Variable
     weak var delegate: WorkspaceViewDelegate?
+    let workspaceTableCellIdentifier: String = "WorkspaceTableCell"
 
     // MARK: Init Function
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(delegate: WorkspaceViewDelegate, navigationBar: UINavigationBar?, navigationItem: UINavigationItem) {
-        self.delegate = delegate
+    init(navigationBar: UINavigationBar?, navigationItem: UINavigationItem) {
         self.navigationBar = navigationBar
         self.navigationItem = navigationItem
         super.init(frame: UIScreen.main.fixedCoordinateSpace.bounds)
@@ -97,16 +105,6 @@ extension DefaultWorkspaceView {
 // MARK: @objc Function
 extension DefaultWorkspaceView {
     
-    @objc
-    func onRightBarButtonItemTapped(_ sender: UIBarButtonItem) {
-        self.delegate?.onRightBarButtonItemTapped?(sender)
-    }
-    
-    @objc
-    func onSquarePencilBarButtonItemTapped(_ sender: UIBarButtonItem) {
-        self.delegate?.onSquarePencilBarButtonItemTapped?(sender)
-    }
-    
 }
 
 // MARK: Input View
@@ -118,10 +116,8 @@ extension DefaultWorkspaceView {
         controller.navigationController?.isToolbarHidden = false
         controller.toolbarItems = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"),
-                            style: .done,
-                            target: self,
-                            action: #selector(self.onSquarePencilBarButtonItemTapped(_:)))
+            self.titleBarButtonItem,
+            self.squarePencilBarButtonItem
         ]
     }
     
@@ -129,7 +125,6 @@ extension DefaultWorkspaceView {
     }
     
     func viewWillDisappear() {
-        
     }
     
 }
