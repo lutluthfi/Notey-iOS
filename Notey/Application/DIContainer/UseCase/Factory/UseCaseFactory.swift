@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+extension AppDIContainer: UseCaseFactory { }
+
+public protocol UseCaseFactory {
+    
+    func makeInsertWorkspaceUseCae() -> InsertWorkspaceUseCase
+    
+}

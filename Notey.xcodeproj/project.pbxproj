@@ -33,6 +33,9 @@
 		4F7281CB25F3C7F800C524C3 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7281CA25F3C7F800C524C3 /* UseCaseFactory.swift */; };
 		4F7281D625F3C85700C524C3 /* AppDIContainer+WorkspaceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7281D525F3C85700C524C3 /* AppDIContainer+WorkspaceRepository.swift */; };
 		4F7281E225F3C98700C524C3 /* WorkspaceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7281E125F3C98700C524C3 /* WorkspaceRepositoryTests.swift */; };
+		4F72820425F3D2BD00C524C3 /* InsertWorkspaceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72820325F3D2BD00C524C3 /* InsertWorkspaceUseCase.swift */; };
+		4F72820B25F3D39400C524C3 /* InsertWorkspaceUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72820A25F3D39400C524C3 /* InsertWorkspaceUseCaseTests.swift */; };
+		4F72821825F3D44C00C524C3 /* AppDIContainer+WorkspaceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72821725F3D44C00C524C3 /* AppDIContainer+WorkspaceUseCase.swift */; };
 		4F8F842825EA121E007359F2 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F842725EA121E007359F2 /* AppFlowCoordinator.swift */; };
 		4F8F842D25EA1296007359F2 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F842C25EA1296007359F2 /* AppDIContainer.swift */; };
 		4F8F843325EA13F4007359F2 /* FlowCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F843225EA13F4007359F2 /* FlowCoordinatorFactory.swift */; };
@@ -99,6 +102,9 @@
 		4F7281CA25F3C7F800C524C3 /* UseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
 		4F7281D525F3C85700C524C3 /* AppDIContainer+WorkspaceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDIContainer+WorkspaceRepository.swift"; sourceTree = "<group>"; };
 		4F7281E125F3C98700C524C3 /* WorkspaceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceRepositoryTests.swift; sourceTree = "<group>"; };
+		4F72820325F3D2BD00C524C3 /* InsertWorkspaceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertWorkspaceUseCase.swift; sourceTree = "<group>"; };
+		4F72820A25F3D39400C524C3 /* InsertWorkspaceUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertWorkspaceUseCaseTests.swift; sourceTree = "<group>"; };
+		4F72821725F3D44C00C524C3 /* AppDIContainer+WorkspaceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDIContainer+WorkspaceUseCase.swift"; sourceTree = "<group>"; };
 		4F8F842725EA121E007359F2 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		4F8F842C25EA1296007359F2 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		4F8F843225EA13F4007359F2 /* FlowCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinatorFactory.swift; sourceTree = "<group>"; };
@@ -268,6 +274,7 @@
 		4F7281A025F3AF9100C524C3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				4F72820825F3D37B00C524C3 /* UseCase */,
 				4F7281DB25F3C95000C524C3 /* Interface */,
 			);
 			path = Domain;
@@ -302,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				4F7281C925F3C7EC00C524C3 /* Factory */,
+				4F72821725F3D44C00C524C3 /* AppDIContainer+WorkspaceUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -360,6 +368,30 @@
 				4F7281A125F3AF9800C524C3 /* Entity */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		4F72820225F3D2AF00C524C3 /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				4F72820325F3D2BD00C524C3 /* InsertWorkspaceUseCase.swift */,
+			);
+			path = Workspace;
+			sourceTree = "<group>";
+		};
+		4F72820825F3D37B00C524C3 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				4F72820925F3D38600C524C3 /* Workspace */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		4F72820925F3D38600C524C3 /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
+				4F72820A25F3D39400C524C3 /* InsertWorkspaceUseCaseTests.swift */,
+			);
+			path = Workspace;
 			sourceTree = "<group>";
 		};
 		4F8F841025EA0E74007359F2 /* DIContainer */ = {
@@ -428,6 +460,7 @@
 		4F8F844B25EA159A007359F2 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				4F72820225F3D2AF00C524C3 /* Workspace */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -890,12 +923,14 @@
 				4FD4F77925E2302800E22EE0 /* SceneDelegate.swift in Sources */,
 				4F8F843F25EA143B007359F2 /* AppDIContainer+FlowCoordinatorFactory.swift in Sources */,
 				4FD4F7C425E230DD00E22EE0 /* WorkspaceFlowCoordinator.swift in Sources */,
+				4F72821825F3D44C00C524C3 /* AppDIContainer+WorkspaceUseCase.swift in Sources */,
 				4FD4F7BC25E230CD00E22EE0 /* WorkspaceController.swift in Sources */,
 				4F39199925EA822B00051A35 /* WSDetailViewModel.swift in Sources */,
 				4F72815225F102A000C524C3 /* AppDIContainer+AuthFlowCoordinatorFactory.swift in Sources */,
 				4FD4F7BD25E230CD00E22EE0 /* WorkspaceViewModel.swift in Sources */,
 				4F39199825EA822B00051A35 /* WSDetailController.swift in Sources */,
 				4F8F844425EA14AE007359F2 /* AppDIContainer+WorkspaceFlowCoordinatorFactory.swift in Sources */,
+				4F72820425F3D2BD00C524C3 /* InsertWorkspaceUseCase.swift in Sources */,
 				4F7281D625F3C85700C524C3 /* AppDIContainer+WorkspaceRepository.swift in Sources */,
 				4F7281CB25F3C7F800C524C3 /* UseCaseFactory.swift in Sources */,
 				4F8F843325EA13F4007359F2 /* FlowCoordinatorFactory.swift in Sources */,
@@ -910,6 +945,7 @@
 				4F391A8025EBB47B00051A35 /* DateTests.swift in Sources */,
 				4F72819925F3977F00C524C3 /* CoreDataStorage.xcdatamodeld in Sources */,
 				4F7281A325F3AFA800C524C3 /* WorkspaceDomainMock.swift in Sources */,
+				4F72820B25F3D39400C524C3 /* InsertWorkspaceUseCaseTests.swift in Sources */,
 				4F391A5F25EBB1FD00051A35 /* CoreDataStorageMock.swift in Sources */,
 				4F391A8525EBB48200051A35 /* Int64Tests.swift in Sources */,
 				4F7281E225F3C98700C524C3 /* WorkspaceRepositoryTests.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  WorkspaceRepositoryTests.swift
+//  InsertWorkspaceUseCaseTests.swift
 //  NoteyTests
 //
 //  Created by Arif Luthfiansyah on 06/03/21.
@@ -10,7 +10,7 @@ import RxSwift
 import RxTest
 import XCTest
 
-class WorkspaceRepositoryTests: XCTestCase {
+class InsertWorkspaceUseCaseTests: XCTestCase {
 
     private let disposeBag = DisposeBag()
     private let semaphore = DispatchSemaphore(value: 0)
@@ -28,8 +28,11 @@ class WorkspaceRepositoryTests: XCTestCase {
     private lazy var localWorkspaceStorageStub: LocalWorkspaceStorage = {
         return DefaultLocalWorkspaceStorage(coreDataStorage: self.coreDataStorageMock)
     }()
-    private lazy var workspaceRepository: WorkspaceRepository = {
+    private lazy var workspaceRepositoryStub: WorkspaceRepository = {
         return DefaultWorkspaceRepository(localWorkspaceStorage: self.localWorkspaceStorageStub)
+    }()
+    private lazy var insertWorksaceUseCase: InsertWorkspaceUseCase = {
+        return DefaultInsertWorkspaceUseCase(workspaceRepository: self.workspaceRepositoryStub)
     }()
     
     override func setUp() {
@@ -43,7 +46,7 @@ class WorkspaceRepositoryTests: XCTestCase {
     }
     
     func makeStub() {
-        self.localWorkspaceStorageStub
+        self.workspaceRepositoryStub
             .insertWorkspace(WorkspaceDomain.stubElement)
             .subscribe(onCompleted: { [unowned self] in
                 self.semaphore.signal()
@@ -53,7 +56,7 @@ class WorkspaceRepositoryTests: XCTestCase {
     }
     
     func removeStub() {
-        self.localWorkspaceStorageStub
+        self.workspaceRepositoryStub
             .removeAllWorkspace()
             .subscribe(onCompleted: { [unowned self] in
                 self.semaphore.signal()
@@ -64,62 +67,28 @@ class WorkspaceRepositoryTests: XCTestCase {
 
 }
 
-extension WorkspaceRepositoryTests {
+extension InsertWorkspaceUseCaseTests {
     
-    func test_insertWorkspace_shouldInsertedToCoreData() {
+    func test_execute_shouldSuccess() {
         let given = WorkspaceDomain.stubElement
+        
+        let requestValue = InsertWorkspaceUseCaseRequestValue(workspace: given)
         
         var result: WorkspaceDomain?
         do {
-            result = try self.workspaceRepository
-                .insertWorkspace(given)
+            result = try self.insertWorksaceUseCase
+                .execute(requestValue: requestValue)
                 .toBlocking(timeout: self.insertElementTimeout)
                 .single()
         } catch {
-            let message = "WorkspaceRepositoryTests -> [FAIL] " +
-                "test_insertWorkspace_thenInsertedToCoreData() " +
+            let message = "InsertWorkspaceUseCaseTests -> [FAIL] " +
+                "test_execute() " +
                 "with given \(given) " +
                 "caused by \(error.localizedDescription)"
             XCTFail(message)
         }
         
-        XCTAssertNotNil(result)
-    }
-    
-    func test_fetchAllWorkspace_shouldFetchedFromCoreData() {
-        var result: [WorkspaceDomain] = []
-        
-        do {
-            result = try self.workspaceRepository
-                .fetchAllWorkspace()
-                .toBlocking(timeout: self.fetchCollectionTimeout)
-                .single()
-        } catch {
-            let message = "WorkspaceRepositoryTests -> [FAIL] " +
-                "test_fetchAllWorkspace_thenFetchedFromCoreData() " +
-                "caused by \(error.localizedDescription)"
-            XCTFail(message)
-        }
-        
-        XCTAssertTrue(!result.isEmpty)
-    }
-    
-    func test_removeAllWorkspace_shouldRemovedFromCoreData() {
-        var result: [WorkspaceDomain] = []
-        
-        do {
-            result = try self.workspaceRepository
-                .removeAllWorkspace()
-                .toBlocking(timeout: self.removeCollectionTimeout)
-                .single()
-        } catch {
-            let message = "WorkspaceRepositoryTests -> [FAIL] " +
-                "test_removeAllWorkspace_thenRemovedFromCoreData() " +
-                "caused by \(error.localizedDescription)"
-            XCTFail(message)
-        }
-        
-        XCTAssertTrue(!result.isEmpty)
+        XCTAssertNotNil(result?.coreId)
     }
     
 }

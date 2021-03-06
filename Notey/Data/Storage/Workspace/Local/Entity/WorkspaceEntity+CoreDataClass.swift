@@ -16,7 +16,6 @@ public class WorkspaceEntity: NSManagedObject {
 
     public convenience init(_ domain: WorkspaceDomain, insertInto context: NSManagedObjectContext) {
         self.init(context: context)
-        self.id = domain.coreId
         self.createdAt = domain.createdAt
         self.updatedAt = domain.updatedAt
         self.name = domain.name
@@ -28,7 +27,7 @@ extension WorkspaceEntity {
     
     func toDomain() -> WorkspaceDomain {
         return WorkspaceDomain(
-            coreId: self.id,
+            coreId: self.objectID.uriRepresentation().path,
             createdAt: self.createdAt,
             updatedAt: self.updatedAt,
             name: self.name

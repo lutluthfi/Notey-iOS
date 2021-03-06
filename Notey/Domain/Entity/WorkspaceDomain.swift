@@ -9,13 +9,13 @@ import Foundation
 
 public struct WorkspaceDomain {
  
-    public var coreId: String
+    public var coreId: String?
     public var createdAt: Int64
     public var updatedAt: Int64
     
     public var name: String
     
-    public init(coreId: String, createdAt: Int64, updatedAt: Int64, name: String) {
+    public init(coreId: String? = nil, createdAt: Int64, updatedAt: Int64, name: String) {
         self.coreId = coreId
         self.createdAt = createdAt
         self.updatedAt = updatedAt

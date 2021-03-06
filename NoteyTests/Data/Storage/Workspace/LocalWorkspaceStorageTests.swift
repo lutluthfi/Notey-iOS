@@ -14,18 +14,20 @@ import XCTest
 
 class LocalWorkspaceStorageTests: XCTestCase {
 
-    var fetchCollectionTimeout: TimeInterval {
+    private var fetchCollectionTimeout: TimeInterval {
         return self.coreDataStorageMock.fetchCollectionTimeout
     }
-    var insertElementTimeout: TimeInterval {
+    private var insertElementTimeout: TimeInterval {
         return self.coreDataStorageMock.insertElementTimeout
     }
-    var removeCollectionTimeout: TimeInterval {
+    private var removeCollectionTimeout: TimeInterval {
         return self.coreDataStorageMock.removeCollectionTimeout
     }
     
-    lazy var coreDataStorageMock: CoreDataStorageSharedMock = CoreDataStorageMock()
-    lazy var localStorage: LocalWorkspaceStorage = DefaultLocalWorkspaceStorage(coreDataStorage: self.coreDataStorageMock)
+    private lazy var coreDataStorageMock: CoreDataStorageSharedMock = CoreDataStorageMock()
+    private lazy var localStorage: LocalWorkspaceStorage = {
+        return DefaultLocalWorkspaceStorage(coreDataStorage: self.coreDataStorageMock)
+    }()
     
     override func setUp() {
         super.setUp()
@@ -33,11 +35,21 @@ class LocalWorkspaceStorageTests: XCTestCase {
     }
     
     override func tearDown() {
-        self.flushStub()
+        self.removeStub()
         super.tearDown()
     }
     
-    func flushStub() {
+    private func makeStub() {
+        do {
+            let workspace = WorkspaceDomain.stubCollection
+            _ = workspace.map { WorkspaceEntity($0, insertInto: self.coreDataStorageMock.context) }
+            try self.coreDataStorageMock.context.save()
+        } catch {
+            XCTFail("LocalWorkspaceStorageTests -> [FAIL] makeStub() caused by \(error.localizedDescription)")
+        }
+    }
+    
+    private func removeStub() {
         do {
             let context = self.coreDataStorageMock.context
             let request: NSFetchRequest = WorkspaceEntity.fetchRequest()
@@ -51,32 +63,19 @@ class LocalWorkspaceStorageTests: XCTestCase {
         }
     }
     
-    func makeStub() {
-        do {
-            let workspace = WorkspaceDomain.stubCollection
-            _ = workspace.map { WorkspaceEntity($0, insertInto: self.coreDataStorageMock.context) }
-            try self.coreDataStorageMock.context.save()
-        } catch {
-            XCTFail("LocalWorkspaceStorageTests -> [FAIL] makeStub() caused by \(error.localizedDescription)")
-        }
-    }
-    
 }
 
-extension LocalWorkspaceStorageTests {
+private extension LocalWorkspaceStorageTests {
     
-    func test_insertWorkspace_thenInsertedToCoreData() {
-        let given = WorkspaceDomain(coreId: "1",
-                                    createdAt: Date().toInt64(),
-                                    updatedAt: Date().toInt64(),
-                                    name: "1")
+    func test_insertWorkspace_shouldInsertedToCoreData() {
+        let given = WorkspaceDomain.stubElement
         
-        var result: [WorkspaceDomain] = []
+        var result: WorkspaceDomain?
         do {
             result = try self.localStorage
                 .insertWorkspace(given)
                 .toBlocking(timeout: self.insertElementTimeout)
-                .toArray()
+                .single()
         } catch {
             let message = "LocalWorkspaceStorageTests -> [FAIL] " +
                 "test_insertWorkspace_thenInsertedToCoreData() " +
@@ -85,18 +84,12 @@ extension LocalWorkspaceStorageTests {
             XCTFail(message)
         }
         
-        let expectation = [
-            WorkspaceDomain(coreId: "1",
-                            createdAt: Date().toInt64(),
-                            updatedAt: Date().toInt64(),
-                            name: "1")
-        ]
-        
-        XCTAssertEqual(result, expectation)
+        XCTAssertNotNil(result?.coreId)
     }
     
-    func test_fetchAllWorkspace_thenFetchedFromCoreData() {
+    func test_fetchAllWorkspace_shouldFetchedFromCoreData() {
         var result: [WorkspaceDomain] = []
+        
         do {
             result = try self.localStorage
                 .fetchAllWorkspace()
@@ -112,7 +105,7 @@ extension LocalWorkspaceStorageTests {
         XCTAssertTrue(!result.isEmpty)
     }
     
-    func test_removeAllWorkspace_thenRemovedFromCoreData() {
+    func test_removeAllWorkspace_shouldRemovedFromCoreData() {
         var result: [WorkspaceDomain] = []
         
         do {
