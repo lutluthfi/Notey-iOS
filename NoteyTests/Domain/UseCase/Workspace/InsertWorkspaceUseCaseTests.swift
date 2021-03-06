@@ -23,7 +23,6 @@ class InsertWorkspaceUseCaseTests: XCTestCase {
     private var removeCollectionTimeout: TimeInterval {
         return self.coreDataStorageMock.removeCollectionTimeout
     }
-    
     private lazy var coreDataStorageMock: CoreDataStorageSharedMock = CoreDataStorageMock()
     private lazy var localWorkspaceStorageStub: LocalWorkspaceStorage = {
         return DefaultLocalWorkspaceStorage(coreDataStorage: self.coreDataStorageMock)
@@ -34,6 +33,8 @@ class InsertWorkspaceUseCaseTests: XCTestCase {
     private lazy var insertWorksaceUseCase: InsertWorkspaceUseCase = {
         return DefaultInsertWorkspaceUseCase(workspaceRepository: self.workspaceRepositoryStub)
     }()
+    
+    private var insertedWorkspaceStub: WorkspaceDomain?
     
     override func setUp() {
         super.setUp()
@@ -48,7 +49,9 @@ class InsertWorkspaceUseCaseTests: XCTestCase {
     func makeStub() {
         self.workspaceRepositoryStub
             .insertWorkspace(WorkspaceDomain.stubElement)
-            .subscribe(onCompleted: { [unowned self] in
+            .subscribe(onNext: { [unowned self] workspace in
+                self.insertedWorkspaceStub = workspace
+            }, onCompleted: { [unowned self] in
                 self.semaphore.signal()
             })
             .disposed(by: self.disposeBag)
@@ -70,7 +73,8 @@ class InsertWorkspaceUseCaseTests: XCTestCase {
 extension InsertWorkspaceUseCaseTests {
     
     func test_execute_shouldSuccess() {
-        let given = WorkspaceDomain.stubElement
+        var given = self.insertedWorkspaceStub!
+        given.name = "Workspace 12345"
         
         let requestValue = InsertWorkspaceUseCaseRequestValue(workspace: given)
         
@@ -89,6 +93,8 @@ extension InsertWorkspaceUseCaseTests {
         }
         
         XCTAssertNotNil(result?.coreId)
+        XCTAssertEqual(result?.coreId, given.coreId)
+        XCTAssertEqual(result?.name, given.name)
     }
     
 }

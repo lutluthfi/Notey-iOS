@@ -25,7 +25,7 @@ extension DefaultWorkspaceRepository: WorkspaceRepository {
     }
     
     public func insertWorkspace(_ object: WorkspaceDomain) -> Observable<WorkspaceDomain> {
-        return self.localWorkspaceStorage.insertWorkspace(object)
+        return self.localWorkspaceStorage.insertSynchronizeWorkspace(object)
     }
     
     public func removeAllWorkspace() -> Observable<[WorkspaceDomain]> {

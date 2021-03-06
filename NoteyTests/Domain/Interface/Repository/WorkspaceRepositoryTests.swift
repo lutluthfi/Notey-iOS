@@ -23,7 +23,6 @@ class WorkspaceRepositoryTests: XCTestCase {
     private var removeCollectionTimeout: TimeInterval {
         return self.coreDataStorageMock.removeCollectionTimeout
     }
-    
     private lazy var coreDataStorageMock: CoreDataStorageSharedMock = CoreDataStorageMock()
     private lazy var localWorkspaceStorageStub: LocalWorkspaceStorage = {
         return DefaultLocalWorkspaceStorage(coreDataStorage: self.coreDataStorageMock)
@@ -44,7 +43,7 @@ class WorkspaceRepositoryTests: XCTestCase {
     
     func makeStub() {
         self.localWorkspaceStorageStub
-            .insertWorkspace(WorkspaceDomain.stubElement)
+            .insertSynchronizeWorkspace(WorkspaceDomain.stubElement)
             .subscribe(onCompleted: { [unowned self] in
                 self.semaphore.signal()
             })

@@ -14,7 +14,7 @@ public protocol LocalWorkspaceStorage: WorkspaceStorage {
     func fetchAllWorkspace() -> Observable<[WorkspaceDomain]>
     
     @discardableResult
-    func insertWorkspace(_ object: WorkspaceDomain) -> Observable<WorkspaceDomain>
+    func insertSynchronizeWorkspace(_ object: WorkspaceDomain) -> Observable<WorkspaceDomain>
     
     @discardableResult
     func removeAllWorkspace() -> Observable<[WorkspaceDomain]>
@@ -54,13 +54,21 @@ extension DefaultLocalWorkspaceStorage: LocalWorkspaceStorage {
         }.observeOn(CurrentThreadScheduler.instance)
     }
     
-    public func insertWorkspace(_ object: WorkspaceDomain) -> Observable<WorkspaceDomain> {
+    public func insertSynchronizeWorkspace(_ object: WorkspaceDomain) -> Observable<WorkspaceDomain> {
         return Observable<WorkspaceDomain>.create { [unowned self] (observer) -> Disposable in
             self.coreDataStorage.performBackgroundTask { (context) in
                 do {
-                    let entity = WorkspaceEntity(object, insertInto: context)
+                    let request: NSFetchRequest = WorkspaceEntity.fetchRequest()
+                    let exisitingEntities = try context.fetch(request)
+                    let inserted: WorkspaceEntity
+                    if let coreId = object.coreId,
+                       let existing = exisitingEntities.first(where: { $0.objectID.uriRepresentation().path == coreId }) {
+                        inserted = existing.synchronizeWithObjectId(with: object, context: context)
+                    } else {
+                        inserted = WorkspaceEntity(object, insertInto: context)
+                    }
                     try context.save()
-                    let domain = entity.toDomain()
+                    let domain = inserted.toDomain()
                     observer.onNext(domain)
                     observer.onCompleted()
                 } catch {

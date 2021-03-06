@@ -25,6 +25,21 @@ public class WorkspaceEntity: NSManagedObject {
 
 extension WorkspaceEntity {
     
+    @discardableResult
+    func synchronizeWithObjectId(with newObject: WorkspaceDomain, context: NSManagedObjectContext) -> WorkspaceEntity {
+        guard self.objectID.uriRepresentation().path == newObject.coreId else {
+            return WorkspaceEntity(newObject, insertInto: context)
+        }
+        self.createdAt = newObject.createdAt
+        self.updatedAt = newObject.updatedAt
+        self.name = newObject.name
+        return self
+    }
+    
+}
+
+extension WorkspaceEntity {
+    
     func toDomain() -> WorkspaceDomain {
         return WorkspaceDomain(
             coreId: self.objectID.uriRepresentation().path,
