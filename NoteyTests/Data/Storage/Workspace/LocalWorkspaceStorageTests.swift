@@ -2,7 +2,7 @@
 //  LocalWorkspaceStorageTests.swift
 //  NoteyTests
 //
-//  Created by Arif Luthfiansyah on 28/02/21.
+//  Created by Arif Luthfiansyah on 07/03/21.
 //
 
 @testable import Notey
@@ -13,19 +13,9 @@ import RxTest
 import XCTest
 
 class LocalWorkspaceStorageTests: XCTestCase {
-
-    private var fetchCollectionTimeout: TimeInterval {
-        return self.coreDataStorageMock.fetchCollectionTimeout
-    }
-    private var insertElementTimeout: TimeInterval {
-        return self.coreDataStorageMock.insertElementTimeout
-    }
-    private var removeCollectionTimeout: TimeInterval {
-        return self.coreDataStorageMock.removeCollectionTimeout
-    }
-    private lazy var coreDataStorageMock: CoreDataStorageSharedMock = CoreDataStorageMock()
-    private lazy var localStorage: LocalWorkspaceStorage = {
-        return DefaultLocalWorkspaceStorage(coreDataStorage: self.coreDataStorageMock)
+    
+    private lazy var sut: LocalWorkspaceStorageSUT = {
+        return self.makeLocalWorkspaceStorageSUT()
     }()
     
     override func setUp() {
@@ -41,8 +31,8 @@ class LocalWorkspaceStorageTests: XCTestCase {
     private func makeStub() {
         do {
             let workspace = WorkspaceDomain.stubCollection
-            _ = workspace.map { WorkspaceEntity($0, insertInto: self.coreDataStorageMock.context) }
-            try self.coreDataStorageMock.context.save()
+            _ = workspace.map { WorkspaceEntity($0, insertInto: self.sut.coreDataStorageMock.context) }
+            try self.sut.coreDataStorageMock.context.save()
         } catch {
             XCTFail("LocalWorkspaceStorageTests -> [FAIL] makeStub() caused by \(error.localizedDescription)")
         }
@@ -50,7 +40,7 @@ class LocalWorkspaceStorageTests: XCTestCase {
     
     private func removeStub() {
         do {
-            let context = self.coreDataStorageMock.context
+            let context = self.sut.coreDataStorageMock.context
             let request: NSFetchRequest = WorkspaceEntity.fetchRequest()
             let workspaces = try context.fetch(request)
             workspaces.forEach { (entity) in
@@ -66,18 +56,18 @@ class LocalWorkspaceStorageTests: XCTestCase {
 
 private extension LocalWorkspaceStorageTests {
     
-    func test_insertSynchronizeWorkspace_shouldInsertedToCoreData() {
+    func test_insertSynchronizeWorkspace_shouldInsertedIntoCoreData() {
         let given = WorkspaceDomain.stubElement
         
         var result: WorkspaceDomain?
         do {
-            result = try self.localStorage
+            result = try self.sut.localWorkspaceStorage
                 .insertSynchronizeWorkspace(given)
-                .toBlocking(timeout: self.insertElementTimeout)
+                .toBlocking(timeout: self.sut.insertElementTimeout)
                 .single()
         } catch {
             let message = "LocalWorkspaceStorageTests -> [FAIL] " +
-                "test_insertWorkspace_thenInsertedToCoreData() " +
+                "test_insertSynchronizeWorkspace_shouldInsertedIntoCoreData() " +
                 "with given \(given) " +
                 "caused by \(error.localizedDescription)"
             XCTFail(message)
@@ -90,13 +80,13 @@ private extension LocalWorkspaceStorageTests {
         var result: [WorkspaceDomain] = []
         
         do {
-            result = try self.localStorage
+            result = try self.sut.localWorkspaceStorage
                 .fetchAllWorkspace()
-                .toBlocking(timeout: self.fetchCollectionTimeout)
+                .toBlocking(timeout: self.sut.fetchCollectionTimeout)
                 .single()
         } catch {
             let message = "LocalWorkspaceStorageTests -> [FAIL] " +
-                "test_fetchAllWorkspace_thenFetchedFromCoreData() " +
+                "test_fetchAllWorkspace_shouldFetchedFromCoreData() " +
                 "caused by \(error.localizedDescription)"
             XCTFail(message)
         }
@@ -108,13 +98,13 @@ private extension LocalWorkspaceStorageTests {
         var result: [WorkspaceDomain] = []
         
         do {
-            result = try self.localStorage
+            result = try self.sut.localWorkspaceStorage
                 .removeAllWorkspace()
-                .toBlocking(timeout: self.removeCollectionTimeout)
+                .toBlocking(timeout: self.sut.removeCollectionTimeout)
                 .single()
         } catch {
             let message = "LocalWorkspaceStorageTests -> [FAIL] " +
-                "test_removeAllWorkspace_thenRemovedFromCoreData() " +
+                "test_removeAllWorkspace_shouldRemovedFromCoreData() " +
                 "caused by \(error.localizedDescription)"
             XCTFail(message)
         }

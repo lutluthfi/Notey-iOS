@@ -11,24 +11,9 @@ import RxTest
 import XCTest
 
 class WorkspaceRepositoryTests: XCTestCase {
-
-    private let disposeBag = DisposeBag()
-    private let semaphore = DispatchSemaphore(value: 0)
-    private var fetchCollectionTimeout: TimeInterval {
-        return self.coreDataStorageMock.fetchCollectionTimeout
-    }
-    private var insertElementTimeout: TimeInterval {
-        return self.coreDataStorageMock.insertElementTimeout
-    }
-    private var removeCollectionTimeout: TimeInterval {
-        return self.coreDataStorageMock.removeCollectionTimeout
-    }
-    private lazy var coreDataStorageMock: CoreDataStorageSharedMock = CoreDataStorageMock()
-    private lazy var localWorkspaceStorageStub: LocalWorkspaceStorage = {
-        return DefaultLocalWorkspaceStorage(coreDataStorage: self.coreDataStorageMock)
-    }()
-    private lazy var workspaceRepository: WorkspaceRepository = {
-        return DefaultWorkspaceRepository(localWorkspaceStorage: self.localWorkspaceStorageStub)
+    
+    private lazy var sut: WorkspaceRepositorySUT = {
+        return self.makeWorkspaceRepositorySUT()
     }()
     
     override func setUp() {
@@ -42,81 +27,55 @@ class WorkspaceRepositoryTests: XCTestCase {
     }
     
     func makeStub() {
-        self.localWorkspaceStorageStub
+        self.sut.localWorkspaceStorage
             .insertSynchronizeWorkspace(WorkspaceDomain.stubElement)
             .subscribe(onCompleted: { [unowned self] in
-                self.semaphore.signal()
+                self.sut.semaphore.signal()
             })
-            .disposed(by: self.disposeBag)
-        self.semaphore.wait()
+            .disposed(by: self.sut.disposeBag)
+        self.sut.semaphore.wait()
     }
     
     func removeStub() {
-        self.localWorkspaceStorageStub
+        self.sut.localWorkspaceStorage
             .removeAllWorkspace()
             .subscribe(onCompleted: { [unowned self] in
-                self.semaphore.signal()
+                self.sut.semaphore.signal()
             })
-            .disposed(by: self.disposeBag)
-        self.semaphore.wait()
+            .disposed(by: self.sut.disposeBag)
+        self.sut.semaphore.wait()
     }
 
 }
 
 extension WorkspaceRepositoryTests {
     
-    func test_insertWorkspace_shouldInsertedToCoreData() {
+    func test_insertWorkspace_shouldInsertedIntoCoreData() {
         let given = WorkspaceDomain.stubElement
         
-        var result: WorkspaceDomain?
-        do {
-            result = try self.workspaceRepository
-                .insertWorkspace(given)
-                .toBlocking(timeout: self.insertElementTimeout)
-                .single()
-        } catch {
-            let message = "WorkspaceRepositoryTests -> [FAIL] " +
-                "test_insertWorkspace_thenInsertedToCoreData() " +
-                "with given \(given) " +
-                "caused by \(error.localizedDescription)"
-            XCTFail(message)
-        }
+        let result = try? self.sut.workspaceRepository
+            .insertWorkspace(given)
+            .toBlocking(timeout: self.sut.insertElementTimeout)
+            .single()
         
         XCTAssertNotNil(result)
+        XCTAssertNotNil(result?.coreId)
     }
     
     func test_fetchAllWorkspace_shouldFetchedFromCoreData() {
-        var result: [WorkspaceDomain] = []
-        
-        do {
-            result = try self.workspaceRepository
-                .fetchAllWorkspace()
-                .toBlocking(timeout: self.fetchCollectionTimeout)
-                .single()
-        } catch {
-            let message = "WorkspaceRepositoryTests -> [FAIL] " +
-                "test_fetchAllWorkspace_thenFetchedFromCoreData() " +
-                "caused by \(error.localizedDescription)"
-            XCTFail(message)
-        }
+        let result = (try? self.sut.workspaceRepository
+                        .fetchAllWorkspace()
+                        .toBlocking(timeout: self.sut.fetchCollectionTimeout)
+                        .single()) ?? []
         
         XCTAssertTrue(!result.isEmpty)
     }
     
     func test_removeAllWorkspace_shouldRemovedFromCoreData() {
-        var result: [WorkspaceDomain] = []
-        
-        do {
-            result = try self.workspaceRepository
-                .removeAllWorkspace()
-                .toBlocking(timeout: self.removeCollectionTimeout)
-                .single()
-        } catch {
-            let message = "WorkspaceRepositoryTests -> [FAIL] " +
-                "test_removeAllWorkspace_thenRemovedFromCoreData() " +
-                "caused by \(error.localizedDescription)"
-            XCTFail(message)
-        }
+        let result = (try? self.sut.workspaceRepository
+                        .removeAllWorkspace()
+                        .toBlocking(timeout: self.sut.removeCollectionTimeout)
+                        .single()) ?? []
         
         XCTAssertTrue(!result.isEmpty)
     }
