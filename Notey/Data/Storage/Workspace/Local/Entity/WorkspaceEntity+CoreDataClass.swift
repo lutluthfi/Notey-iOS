@@ -27,7 +27,7 @@ extension WorkspaceEntity {
     
     @discardableResult
     func synchronizeWithObjectId(with newObject: WorkspaceDomain, context: NSManagedObjectContext) -> WorkspaceEntity {
-        guard self.objectID.uriRepresentation().path == newObject.coreId else {
+        guard self.objectID == newObject.coreId else {
             return WorkspaceEntity(newObject, insertInto: context)
         }
         self.createdAt = newObject.createdAt
@@ -41,12 +41,10 @@ extension WorkspaceEntity {
 extension WorkspaceEntity {
     
     func toDomain() -> WorkspaceDomain {
-        return WorkspaceDomain(
-            coreId: self.objectID.uriRepresentation().path,
-            createdAt: self.createdAt,
-            updatedAt: self.updatedAt,
-            name: self.name
-        )
+        return WorkspaceDomain(coreId: self.objectID,
+                               createdAt: self.createdAt,
+                               updatedAt: self.updatedAt,
+                               name: self.name)
     }
     
 }

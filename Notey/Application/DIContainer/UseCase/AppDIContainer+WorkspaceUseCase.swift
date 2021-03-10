@@ -9,8 +9,16 @@ import Foundation
 
 extension AppDIContainer {
     
+    func makeFetchAllWorkspaceUseCase() -> FetchAllWorkspaceUseCase {
+        return DefaultFetchAllWorkspaceUseCase(workspaceRepository: self.makeWorkspaceRepository())
+    }
+    
     func makeInsertWorkspaceUseCae() -> InsertWorkspaceUseCase {
         return DefaultInsertWorkspaceUseCase(workspaceRepository: self.makeWorkspaceRepository())
+    }
+    
+    func makeRemoveWorkspaceUseCase() -> RemoveWorkspaceUseCase {
+        return DefaultRemoveWorkspaceUseCase(workspaceRepository: self.makeWorkspaceRepository())
     }
     
 }

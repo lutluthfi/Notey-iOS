@@ -32,4 +32,8 @@ extension DefaultWorkspaceRepository: WorkspaceRepository {
         return self.localWorkspaceStorage.removeAllWorkspace()
     }
     
+    public func removeWorkspace(_ object: WorkspaceDomain) -> Observable<WorkspaceDomain> {
+        return self.localWorkspaceStorage.removeWorkspace(object)
+    }
+    
 }

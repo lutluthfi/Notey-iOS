@@ -3,15 +3,32 @@
 //  Writey
 //
 //  Created by Arif Luthfiansyah on 21/02/21.
-//  Copyright (c) 2021 ___ORGANIZATIONNAME___. All rights reserved.
+//
 
 import CoreData
 import Foundation
 
-public enum CoreDataStorageError: Error {
+public typealias CoreID = NSManagedObjectID
+
+public enum CoreDataStorageError: LocalizedError {
     case readError(Error)
     case saveError(Error)
     case deleteError(Error)
+}
+
+extension CoreDataStorageError {
+    
+    public var errorDescription: String? {
+        switch self {
+        case .deleteError(let error):
+            return error.localizedDescription
+        case .readError(let error):
+            return error.localizedDescription
+        case .saveError(let error):
+            return error.localizedDescription
+        }
+    }
+    
 }
 
 public protocol CoreDataStorageShared {

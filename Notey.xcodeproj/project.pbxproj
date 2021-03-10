@@ -7,24 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0813BADCF023B69CDB45DFFA /* Pods_Notey_NoteyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB861F3A1DF4C3E37F6259DD /* Pods_Notey_NoteyUITests.framework */; };
+		23182A6D24530B535B72F956 /* Pods_NoteyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93473BFC35317040998BCAF /* Pods_NoteyTests.framework */; };
 		40A56671299AA39D4AB4B1C2 /* Pods_Notey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AB0CF77F16B702EF7EE9EF /* Pods_Notey.framework */; };
 		4F39199825EA822B00051A35 /* WSDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39199525EA822B00051A35 /* WSDetailController.swift */; };
 		4F39199925EA822B00051A35 /* WSDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39199625EA822B00051A35 /* WSDetailViewModel.swift */; };
 		4F39199A25EA822B00051A35 /* WSDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F39199725EA822B00051A35 /* WSDetailView.swift */; };
 		4F3919BC25EB9A8000051A35 /* WorkspaceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3919BB25EB9A8000051A35 /* WorkspaceStorage.swift */; };
 		4F3919C425EB9AA200051A35 /* LocalWorkspaceStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3919C325EB9AA200051A35 /* LocalWorkspaceStorage.swift */; };
-		4F3919CE25EB9C5900051A35 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F3919CC25EB9C5900051A35 /* CoreDataStorage.xcdatamodeld */; };
 		4F3919DD25EB9CF900051A35 /* WorkspaceDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3919DC25EB9CF900051A35 /* WorkspaceDomain.swift */; };
-		4F391A2425EBA5B900051A35 /* WorkspaceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3919FF25EBA4D400051A35 /* WorkspaceEntity+CoreDataClass.swift */; };
-		4F391A2525EBA5B900051A35 /* WorkspaceEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F391A0025EBA4D400051A35 /* WorkspaceEntity+CoreDataProperties.swift */; };
 		4F391A5F25EBB1FD00051A35 /* CoreDataStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F391A5E25EBB1FD00051A35 /* CoreDataStorageMock.swift */; };
 		4F391A6D25EBB3F100051A35 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F391A6C25EBB3F100051A35 /* Date.swift */; };
 		4F391A7525EBB45500051A35 /* Int64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F391A7425EBB45500051A35 /* Int64.swift */; };
 		4F391A8025EBB47B00051A35 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F391A7F25EBB47B00051A35 /* DateTests.swift */; };
 		4F391A8525EBB48200051A35 /* Int64Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F391A8425EBB48200051A35 /* Int64Tests.swift */; };
+		4F4D722525F8CDD2005DA77C /* WorkspaceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D722325F8CDD2005DA77C /* WorkspaceEntity+CoreDataClass.swift */; };
+		4F4D722625F8CDD2005DA77C /* WorkspaceEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D722425F8CDD2005DA77C /* WorkspaceEntity+CoreDataProperties.swift */; };
+		4F4D723125F8CDF1005DA77C /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D722E25F8CDF1005DA77C /* CoreDataStorage.xcdatamodeld */; };
+		4F4D723225F8CDF1005DA77C /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D723025F8CDF1005DA77C /* CoreDataStorage.swift */; };
+		4F4D723925F8E15A005DA77C /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F4D722E25F8CDF1005DA77C /* CoreDataStorage.xcdatamodeld */; };
 		4F66212825F4A5EE00DB4375 /* LocalWorkspaceStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66212725F4A5EE00DB4375 /* LocalWorkspaceStorageTests.swift */; };
+		4F66213125F4BC4300DB4375 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66213025F4BC4300DB4375 /* UIViewController+Alert.swift */; };
+		4F66214425F4C8C100DB4375 /* SectionItemsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66214325F4C8C100DB4375 /* SectionItemsDomain.swift */; };
+		4F66215925F4E11100DB4375 /* Date+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66215825F4E11100DB4375 /* Date+Formatted.swift */; };
+		4F66216125F4EE1300DB4375 /* RemoveWorkspaceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66216025F4EE1300DB4375 /* RemoveWorkspaceUseCase.swift */; };
+		4F66216625F4F65800DB4375 /* Array+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66216525F4F65800DB4375 /* Array+Equatable.swift */; };
+		4F66216E25F4FB1A00DB4375 /* ArrayEquatableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66216D25F4FB1A00DB4375 /* ArrayEquatableTests.swift */; };
 		4F72815225F102A000C524C3 /* AppDIContainer+AuthFlowCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72815125F102A000C524C3 /* AppDIContainer+AuthFlowCoordinatorFactory.swift */; };
-		4F72819925F3977F00C524C3 /* CoreDataStorage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F3919CC25EB9C5900051A35 /* CoreDataStorage.xcdatamodeld */; };
 		4F7281A325F3AFA800C524C3 /* WorkspaceDomainMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7281A225F3AFA800C524C3 /* WorkspaceDomainMock.swift */; };
 		4F7281AC25F3C63600C524C3 /* WorkspaceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7281AB25F3C63600C524C3 /* WorkspaceRepository.swift */; };
 		4F7281B125F3C64900C524C3 /* DefaultWorkspaceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7281B025F3C64900C524C3 /* DefaultWorkspaceRepository.swift */; };
@@ -53,7 +62,6 @@
 		4FD4F7BD25E230CD00E22EE0 /* WorkspaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4F7BA25E230CD00E22EE0 /* WorkspaceViewModel.swift */; };
 		4FD4F7BE25E230CD00E22EE0 /* WorkspaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4F7BB25E230CD00E22EE0 /* WorkspaceView.swift */; };
 		4FD4F7C425E230DD00E22EE0 /* WorkspaceFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4F7C325E230DD00E22EE0 /* WorkspaceFlowCoordinator.swift */; };
-		4FD4F7E925E235F800E22EE0 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD4F7E825E235F800E22EE0 /* CoreDataStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,16 +92,23 @@
 		4F39199725EA822B00051A35 /* WSDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSDetailView.swift; sourceTree = "<group>"; };
 		4F3919BB25EB9A8000051A35 /* WorkspaceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceStorage.swift; sourceTree = "<group>"; };
 		4F3919C325EB9AA200051A35 /* LocalWorkspaceStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceStorage.swift; sourceTree = "<group>"; };
-		4F3919CD25EB9C5900051A35 /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
 		4F3919DC25EB9CF900051A35 /* WorkspaceDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDomain.swift; sourceTree = "<group>"; };
-		4F3919FF25EBA4D400051A35 /* WorkspaceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		4F391A0025EBA4D400051A35 /* WorkspaceEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4F391A5E25EBB1FD00051A35 /* CoreDataStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageMock.swift; sourceTree = "<group>"; };
 		4F391A6C25EBB3F100051A35 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		4F391A7425EBB45500051A35 /* Int64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int64.swift; sourceTree = "<group>"; };
 		4F391A7F25EBB47B00051A35 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 		4F391A8425EBB48200051A35 /* Int64Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int64Tests.swift; sourceTree = "<group>"; };
+		4F4D722325F8CDD2005DA77C /* WorkspaceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WorkspaceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4F4D722425F8CDD2005DA77C /* WorkspaceEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WorkspaceEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4F4D722F25F8CDF1005DA77C /* CoreDataStorage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataStorage.xcdatamodel; sourceTree = "<group>"; };
+		4F4D723025F8CDF1005DA77C /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		4F66212725F4A5EE00DB4375 /* LocalWorkspaceStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkspaceStorageTests.swift; sourceTree = "<group>"; };
+		4F66213025F4BC4300DB4375 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		4F66214325F4C8C100DB4375 /* SectionItemsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionItemsDomain.swift; sourceTree = "<group>"; };
+		4F66215825F4E11100DB4375 /* Date+Formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatted.swift"; sourceTree = "<group>"; };
+		4F66216025F4EE1300DB4375 /* RemoveWorkspaceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveWorkspaceUseCase.swift; sourceTree = "<group>"; };
+		4F66216525F4F65800DB4375 /* Array+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Equatable.swift"; sourceTree = "<group>"; };
+		4F66216D25F4FB1A00DB4375 /* ArrayEquatableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayEquatableTests.swift; sourceTree = "<group>"; };
 		4F72815125F102A000C524C3 /* AppDIContainer+AuthFlowCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDIContainer+AuthFlowCoordinatorFactory.swift"; sourceTree = "<group>"; };
 		4F7281A225F3AFA800C524C3 /* WorkspaceDomainMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDomainMock.swift; sourceTree = "<group>"; };
 		4F7281AB25F3C63600C524C3 /* WorkspaceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceRepository.swift; sourceTree = "<group>"; };
@@ -129,9 +144,10 @@
 		4FD4F7BA25E230CD00E22EE0 /* WorkspaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceViewModel.swift; sourceTree = "<group>"; };
 		4FD4F7BB25E230CD00E22EE0 /* WorkspaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceView.swift; sourceTree = "<group>"; };
 		4FD4F7C325E230DD00E22EE0 /* WorkspaceFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceFlowCoordinator.swift; sourceTree = "<group>"; };
-		4FD4F7E825E235F800E22EE0 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		99566E338E62D35C69E35870 /* Pods-Notey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notey.debug.xcconfig"; path = "Target Support Files/Pods-Notey/Pods-Notey.debug.xcconfig"; sourceTree = "<group>"; };
 		C28EC96DEBAC9D0BAF0405E1 /* Pods-Notey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notey.release.xcconfig"; path = "Target Support Files/Pods-Notey/Pods-Notey.release.xcconfig"; sourceTree = "<group>"; };
+		CB861F3A1DF4C3E37F6259DD /* Pods_Notey_NoteyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notey_NoteyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D93473BFC35317040998BCAF /* Pods_NoteyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23182A6D24530B535B72F956 /* Pods_NoteyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0813BADCF023B69CDB45DFFA /* Pods_Notey_NoteyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,8 +200,8 @@
 		4F3919C825EB9B9B00051A35 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				4F3919FF25EBA4D400051A35 /* WorkspaceEntity+CoreDataClass.swift */,
-				4F391A0025EBA4D400051A35 /* WorkspaceEntity+CoreDataProperties.swift */,
+				4F4D722325F8CDD2005DA77C /* WorkspaceEntity+CoreDataClass.swift */,
+				4F4D722425F8CDD2005DA77C /* WorkspaceEntity+CoreDataProperties.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -240,6 +258,7 @@
 		4F391A6B25EBB3E200051A35 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				4F66216525F4F65800DB4375 /* Array+Equatable.swift */,
 				4F391A6C25EBB3F100051A35 /* Date.swift */,
 				4F391A7425EBB45500051A35 /* Int64.swift */,
 			);
@@ -267,6 +286,25 @@
 			children = (
 				4F391A7F25EBB47B00051A35 /* DateTests.swift */,
 				4F391A8425EBB48200051A35 /* Int64Tests.swift */,
+				4F66216D25F4FB1A00DB4375 /* ArrayEquatableTests.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		4F4D722D25F8CDF1005DA77C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				4F4D722E25F8CDF1005DA77C /* CoreDataStorage.xcdatamodeld */,
+				4F4D723025F8CDF1005DA77C /* CoreDataStorage.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		4F66212F25F4BC3800DB4375 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4F66215825F4E11100DB4375 /* Date+Formatted.swift */,
+				4F66213025F4BC4300DB4375 /* UIViewController+Alert.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -375,6 +413,7 @@
 			children = (
 				4F72820325F3D2BD00C524C3 /* InsertWorkspaceUseCase.swift */,
 				4F72821F25F46AAF00C524C3 /* FetchAllWorkspaceUseCase.swift */,
+				4F66216025F4EE1300DB4375 /* RemoveWorkspaceUseCase.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -410,6 +449,7 @@
 		4F8F841125EA0E9A007359F2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4F66212F25F4BC3800DB4375 /* Extension */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -454,6 +494,7 @@
 		4F8F844A25EA1596007359F2 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				4F66214325F4C8C100DB4375 /* SectionItemsDomain.swift */,
 				4F3919DC25EB9CF900051A35 /* WorkspaceDomain.swift */,
 			);
 			path = Entity;
@@ -566,7 +607,7 @@
 		4FD4F7AF25E2304F00E22EE0 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				4FD4F7CB25E230FD00E22EE0 /* CoreData */,
+				4F4D722D25F8CDF1005DA77C /* CoreData */,
 				4FD4F7CC25E2311100E22EE0 /* Workspace */,
 			);
 			path = Storage;
@@ -594,8 +635,8 @@
 		4FD4F7B525E230B300E22EE0 /* WorkspaceUI */ = {
 			isa = PBXGroup;
 			children = (
-				4FD4F7BB25E230CD00E22EE0 /* WorkspaceView.swift */,
 				4FD4F7B925E230CD00E22EE0 /* WorkspaceController.swift */,
+				4FD4F7BB25E230CD00E22EE0 /* WorkspaceView.swift */,
 				4FD4F7BA25E230CD00E22EE0 /* WorkspaceViewModel.swift */,
 			);
 			path = WorkspaceUI;
@@ -607,15 +648,6 @@
 				4FD4F7C325E230DD00E22EE0 /* WorkspaceFlowCoordinator.swift */,
 			);
 			path = FlowCoordinator;
-			sourceTree = "<group>";
-		};
-		4FD4F7CB25E230FD00E22EE0 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				4FD4F7E825E235F800E22EE0 /* CoreDataStorage.swift */,
-				4F3919CC25EB9C5900051A35 /* CoreDataStorage.xcdatamodeld */,
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		4FD4F7CC25E2311100E22EE0 /* Workspace */ = {
@@ -631,6 +663,8 @@
 			isa = PBXGroup;
 			children = (
 				14AB0CF77F16B702EF7EE9EF /* Pods_Notey.framework */,
+				CB861F3A1DF4C3E37F6259DD /* Pods_Notey_NoteyUITests.framework */,
+				D93473BFC35317040998BCAF /* Pods_NoteyTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -904,13 +938,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F391A2425EBA5B900051A35 /* WorkspaceEntity+CoreDataClass.swift in Sources */,
-				4F391A2525EBA5B900051A35 /* WorkspaceEntity+CoreDataProperties.swift in Sources */,
+				4F66216625F4F65800DB4375 /* Array+Equatable.swift in Sources */,
 				4F8F842D25EA1296007359F2 /* AppDIContainer.swift in Sources */,
 				4F7281AC25F3C63600C524C3 /* WorkspaceRepository.swift in Sources */,
 				4F39199A25EA822B00051A35 /* WSDetailView.swift in Sources */,
-				4FD4F7E925E235F800E22EE0 /* CoreDataStorage.swift in Sources */,
-				4F3919CE25EB9C5900051A35 /* CoreDataStorage.xcdatamodeld in Sources */,
 				4F3919BC25EB9A8000051A35 /* WorkspaceStorage.swift in Sources */,
 				4FD4F7BE25E230CD00E22EE0 /* WorkspaceView.swift in Sources */,
 				4F8F842825EA121E007359F2 /* AppFlowCoordinator.swift in Sources */,
@@ -919,23 +950,31 @@
 				4FD4F77725E2302800E22EE0 /* AppDelegate.swift in Sources */,
 				4F3919C425EB9AA200051A35 /* LocalWorkspaceStorage.swift in Sources */,
 				4F391A7525EBB45500051A35 /* Int64.swift in Sources */,
+				4F66213125F4BC4300DB4375 /* UIViewController+Alert.swift in Sources */,
+				4F66214425F4C8C100DB4375 /* SectionItemsDomain.swift in Sources */,
 				4F391A6D25EBB3F100051A35 /* Date.swift in Sources */,
 				4F3919DD25EB9CF900051A35 /* WorkspaceDomain.swift in Sources */,
+				4F66215925F4E11100DB4375 /* Date+Formatted.swift in Sources */,
 				4FD4F77925E2302800E22EE0 /* SceneDelegate.swift in Sources */,
 				4F8F843F25EA143B007359F2 /* AppDIContainer+FlowCoordinatorFactory.swift in Sources */,
 				4FD4F7C425E230DD00E22EE0 /* WorkspaceFlowCoordinator.swift in Sources */,
+				4F4D723225F8CDF1005DA77C /* CoreDataStorage.swift in Sources */,
 				4F72822025F46AAF00C524C3 /* FetchAllWorkspaceUseCase.swift in Sources */,
+				4F4D723125F8CDF1005DA77C /* CoreDataStorage.xcdatamodeld in Sources */,
+				4F4D722525F8CDD2005DA77C /* WorkspaceEntity+CoreDataClass.swift in Sources */,
 				4F72821825F3D44C00C524C3 /* AppDIContainer+WorkspaceUseCase.swift in Sources */,
 				4FD4F7BC25E230CD00E22EE0 /* WorkspaceController.swift in Sources */,
 				4F39199925EA822B00051A35 /* WSDetailViewModel.swift in Sources */,
 				4F72815225F102A000C524C3 /* AppDIContainer+AuthFlowCoordinatorFactory.swift in Sources */,
 				4FD4F7BD25E230CD00E22EE0 /* WorkspaceViewModel.swift in Sources */,
+				4F66216125F4EE1300DB4375 /* RemoveWorkspaceUseCase.swift in Sources */,
 				4F39199825EA822B00051A35 /* WSDetailController.swift in Sources */,
 				4F8F844425EA14AE007359F2 /* AppDIContainer+WorkspaceFlowCoordinatorFactory.swift in Sources */,
 				4F72820425F3D2BD00C524C3 /* InsertWorkspaceUseCase.swift in Sources */,
 				4F7281D625F3C85700C524C3 /* AppDIContainer+WorkspaceRepository.swift in Sources */,
 				4F7281CB25F3C7F800C524C3 /* UseCaseFactory.swift in Sources */,
 				4F8F843325EA13F4007359F2 /* FlowCoordinatorFactory.swift in Sources */,
+				4F4D722625F8CDD2005DA77C /* WorkspaceEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,12 +983,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F391A8025EBB47B00051A35 /* DateTests.swift in Sources */,
-				4F72819925F3977F00C524C3 /* CoreDataStorage.xcdatamodeld in Sources */,
 				4F72822B25F46E2900C524C3 /* XCTestCase+DIContainer.swift in Sources */,
 				4F7281A325F3AFA800C524C3 /* WorkspaceDomainMock.swift in Sources */,
 				4F66212825F4A5EE00DB4375 /* LocalWorkspaceStorageTests.swift in Sources */,
+				4F4D723925F8E15A005DA77C /* CoreDataStorage.xcdatamodeld in Sources */,
 				4F72820B25F3D39400C524C3 /* InsertWorkspaceUseCaseTests.swift in Sources */,
 				4F391A5F25EBB1FD00051A35 /* CoreDataStorageMock.swift in Sources */,
+				4F66216E25F4FB1A00DB4375 /* ArrayEquatableTests.swift in Sources */,
 				4F72822525F46BD100C524C3 /* FetchAllWorkspaceUseCaseTests.swift in Sources */,
 				4F391A8525EBB48200051A35 /* Int64Tests.swift in Sources */,
 				4F7281E225F3C98700C524C3 /* WorkspaceRepositoryTests.swift in Sources */,
@@ -1283,12 +1323,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4F3919CC25EB9C5900051A35 /* CoreDataStorage.xcdatamodeld */ = {
+		4F4D722E25F8CDF1005DA77C /* CoreDataStorage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4F3919CD25EB9C5900051A35 /* CoreDataStorage.xcdatamodel */,
+				4F4D722F25F8CDF1005DA77C /* CoreDataStorage.xcdatamodel */,
 			);
-			currentVersion = 4F3919CD25EB9C5900051A35 /* CoreDataStorage.xcdatamodel */;
+			currentVersion = 4F4D722F25F8CDF1005DA77C /* CoreDataStorage.xcdatamodel */;
 			path = CoreDataStorage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

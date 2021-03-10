@@ -35,7 +35,11 @@ extension AppDIContainer {
     
     private func makeWorkspaceViewModel(requestValue: WorkspaceViewModelRequestValue,
                                         route: WorkspaceViewModelRoute) -> WorkspaceViewModel {
-        return DefaultWorkspaceViewModel(requestValue: requestValue, route: route)
+        return DefaultWorkspaceViewModel(requestValue: requestValue,
+                                         route: route,
+                                         fetchAllWorkspaceUseCase: self.makeFetchAllWorkspaceUseCase(),
+                                         insertWorkspaceUseCase: self.makeInsertWorkspaceUseCae(),
+                                         removeWorkspaceUseCase: self.makeRemoveWorkspaceUseCase())
     }
     
 }

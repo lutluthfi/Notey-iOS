@@ -16,8 +16,9 @@ extension WorkspaceEntity {
     }
 
     @NSManaged public var createdAt: Int64
-    @NSManaged public var name: String
     @NSManaged public var updatedAt: Int64
+    
+    @NSManaged public var name: String
 
 }
 

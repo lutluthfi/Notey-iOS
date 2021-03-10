@@ -6,7 +6,9 @@ target 'Notey' do
   use_frameworks!
 
   # Pods for Notey
+  pod 'RealmSwift'
   pod 'RxCocoa'
+  pod 'RxDataSources'
   pod 'RxSwift'
   pod 'SnapKit'
 

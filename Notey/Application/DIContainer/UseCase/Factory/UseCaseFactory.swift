@@ -11,6 +11,8 @@ extension AppDIContainer: UseCaseFactory { }
 
 public protocol UseCaseFactory {
     
+    func makeFetchAllWorkspaceUseCase() -> FetchAllWorkspaceUseCase
     func makeInsertWorkspaceUseCae() -> InsertWorkspaceUseCase
+    func makeRemoveWorkspaceUseCase() -> RemoveWorkspaceUseCase
     
 }
