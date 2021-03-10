@@ -9,6 +9,7 @@
 //  Modified by Arif Luthfiansyah
 //  Created by Oleh Kudinov
 
+import RxSwift
 import UIKit
 
 // MARK: WorkspaceViewDelegate
@@ -41,7 +42,7 @@ protocol WorkspaceViewFunction {
 }
 
 // MARK: WorkspaceView
-protocol WorkspaceView: WorkspaceViewFunction, WorkspaceViewSubview, WorkspaceViewVariable { }
+protocol WorkspaceView: AnyObject, WorkspaceViewFunction, WorkspaceViewSubview, WorkspaceViewVariable { }
 
 // MARK: DefaultWorkspaceView
 final class DefaultWorkspaceView: UIView, WorkspaceView {
@@ -57,7 +58,7 @@ final class DefaultWorkspaceView: UIView, WorkspaceView {
                                action: nil)
     }()
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: self.bounds)
+        let tableView = UITableView(frame: self.bounds, style: .plain)
         tableView.backgroundColor = .white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.workspaceTableCellIdentifier)
         return tableView
@@ -69,9 +70,12 @@ final class DefaultWorkspaceView: UIView, WorkspaceView {
                                action: nil)
     }()
     
-    // MARK: DI Variable
+    // MARK: Variable
     weak var delegate: WorkspaceViewDelegate?
     let workspaceTableCellIdentifier: String = "WorkspaceTableCell"
+    
+    // MARK: Common Variable
+    let disposeBag = DisposeBag()
 
     // MARK: Init Function
     required init?(coder: NSCoder) {
@@ -84,6 +88,7 @@ final class DefaultWorkspaceView: UIView, WorkspaceView {
         super.init(frame: UIScreen.main.fixedCoordinateSpace.bounds)
         self.addSubviews()
         self.makeConstraints()
+        self.setupView()
     }
 
 }
@@ -98,6 +103,9 @@ extension DefaultWorkspaceView {
     func makeConstraints() {
         self.setNeedsLayout()
         self.layoutIfNeeded()
+    }
+    
+    func setupView() {
     }
     
 }
@@ -117,6 +125,7 @@ extension DefaultWorkspaceView {
         controller.toolbarItems = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             self.titleBarButtonItem,
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             self.squarePencilBarButtonItem
         ]
     }
@@ -126,5 +135,9 @@ extension DefaultWorkspaceView {
     
     func viewWillDisappear() {
     }
+    
+}
+
+extension DefaultWorkspaceView {
     
 }

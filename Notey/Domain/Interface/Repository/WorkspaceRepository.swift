@@ -18,4 +18,7 @@ public protocol WorkspaceRepository {
     @discardableResult
     func removeAllWorkspace() -> Observable<[WorkspaceDomain]>
     
+    @discardableResult
+    func removeWorkspace(_ object: WorkspaceDomain) -> Observable<WorkspaceDomain>
+    
 }

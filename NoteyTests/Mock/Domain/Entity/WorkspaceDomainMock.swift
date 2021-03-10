@@ -14,23 +14,23 @@ extension WorkspaceDomain {
     static var stubCollection: [WorkspaceDomain] {
         let now = Date()
         return [
-            WorkspaceDomain(coreId: UUID().uuidString,
+            WorkspaceDomain(coreId: nil,
                             createdAt: now.toInt64(),
                             updatedAt: now.toInt64(),
                             name: "Workspace for one"),
-            WorkspaceDomain(coreId: UUID().uuidString,
+            WorkspaceDomain(coreId: nil,
                             createdAt: now.toInt64(),
                             updatedAt: now.toInt64(),
                             name: "Workspace for two"),
-            WorkspaceDomain(coreId: UUID().uuidString,
+            WorkspaceDomain(coreId: nil,
                             createdAt: now.toInt64(),
                             updatedAt: now.toInt64(),
                             name: "Workspace for three"),
-            WorkspaceDomain(coreId: UUID().uuidString,
+            WorkspaceDomain(coreId: nil,
                             createdAt: now.toInt64(),
                             updatedAt: now.toInt64(),
                             name: "Workspace for four"),
-            WorkspaceDomain(coreId: UUID().uuidString,
+            WorkspaceDomain(coreId: nil,
                             createdAt: now.toInt64(),
                             updatedAt: now.toInt64(),
                             name: "Workspace for five")
@@ -47,7 +47,7 @@ extension WorkspaceDomain {
     
     static var stubElement: WorkspaceDomain {
         let now = Date()
-        return WorkspaceDomain(coreId: UUID().uuidString,
+        return WorkspaceDomain(coreId: nil,
                                createdAt: now.toInt64(),
                                updatedAt: now.toInt64(),
                                name: "Workspace for one")

@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        #if DEBUG
+        print("NSHomeDirectory -> \(NSHomeDirectory())")
+        #endif
         return true
     }
 
